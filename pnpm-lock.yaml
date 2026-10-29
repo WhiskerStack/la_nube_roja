@@ -12,6 +12,9 @@ importers:
         specifier: ^7.4.4
         version: 7.4.4(yaml@2.9.1)
     devDependencies:
+      '@archiver/archiver':
+        specifier: ^0.3.0
+        version: 0.3.0
       gh-pages:
         specifier: ^6.3.0
         version: 6.3.0
@@ -23,6 +26,18 @@ importers:
         version: 0.35.5
 
 packages:
+
+  '@archiver/archiver@0.3.0':
+    resolution: {integrity: sha512-QM7a1/g1rRyL6JYZEdUouMN7ngm51aFaoaHq7gJKlFJ83HStsViljX3AUgdhBT93oMy9UCdj1+SGisW4t7otzQ==}
+    engines: {node: ^22.12.0 || >=24.0.0}
+
+  '@archiver/tar-stream@0.1.1':
+    resolution: {integrity: sha512-exWmvbQrXrrbM9cQYbKT5RvtyuVcuLqPmwhLsvOQsHeYuJL18VsOemTPVR4ABXhwIViJWf31KveW1K0924z03Q==}
+    engines: {node: ^22.12.0 || >=24.0.0}
+
+  '@archiver/zip-stream@0.1.1':
+    resolution: {integrity: sha512-5DBDQwKJBbtKGblPHC8Xih/bC1CHSEEuRrSiW0YjUCJt7GXGTS/t9QD/BhcCwZZxchzjzQhFm99skIO1KxX91w==}
+    engines: {node: ^22.12.0 || >=24.0.0}
 
   '@astrojs/compiler-binding-android-arm64@0.5.2':
     resolution: {integrity: sha512-kckIxon6Rm/Bxzh9mGPYpRRqUbToUQoHptCmpMmE+Yt0Xumq8CqrKUidyYhrBsrHVO7bxuRzzWUUqvpf+iYceQ==}
@@ -1431,6 +1446,15 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@archiver/archiver@0.3.0':
+    dependencies:
+      '@archiver/tar-stream': 0.1.1
+      '@archiver/zip-stream': 0.1.1
+
+  '@archiver/tar-stream@0.1.1': {}
+
+  '@archiver/zip-stream@0.1.1': {}
 
   '@astrojs/compiler-binding-android-arm64@0.5.2':
     optional: true

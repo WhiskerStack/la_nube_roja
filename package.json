@@ -13,6 +13,7 @@
     "screenshot": "node scripts/screenshot.mjs",
     "to-webp": "node scripts/to-webp.mjs",
     "ensure-nojekyll": "node scripts/ensure-nojekyll.mjs",
+    "export": "node scripts/export.mjs",
     "gh-pages:deploy": "gh-pages -d dist -t",
     "deploy": "npm run ensure-nojekyll && npm run build && npm run gh-pages:deploy"
   },
@@ -20,6 +21,7 @@
     "astro": "^7.4.4"
   },
   "devDependencies": {
+    "@archiver/archiver": "^0.3.0",
     "gh-pages": "^6.3.0",
     "playwright": "^1.64.1",
     "sharp": "^0.35.5"
