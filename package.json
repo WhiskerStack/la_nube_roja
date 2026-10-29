@@ -14,7 +14,7 @@
     "to-webp": "node scripts/to-webp.mjs",
     "ensure-nojekyll": "node scripts/ensure-nojekyll.mjs",
     "gh-pages:deploy": "gh-pages -d dist -t",
-    "deploy": "npm run ensure-nojekyll && astro build && npm run gh-pages:deploy"
+    "deploy": "npm run ensure-nojekyll && npm run build && npm run gh-pages:deploy"
   },
   "dependencies": {
     "astro": "^7.4.4"
