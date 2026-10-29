@@ -1,0 +1,113 @@
+---
+const testimonials = [
+  {
+    name: 'María Fernández',
+    role: 'Cliente frecuente',
+    quote: 'La picadera mixta es simplemente espectacular. Se siente el sabor casero en cada bocado.',
+    initials: 'MF',
+  },
+  {
+    name: 'Carlos Rodríguez',
+    role: 'Foodie local',
+    quote: 'El mojito de La Nube Roja es el mejor de la ciudad. Ambiente cálido y servicio impecable.',
+    initials: 'CR',
+  },
+  {
+    name: 'Laura Sánchez',
+    role: 'Cliente nueva',
+    quote: 'Pedí a domicilio y llegó caliente y delicioso. Las croquetas son adictivas.',
+    initials: 'LS',
+  },
+];
+---
+
+<section id="opiniones" class="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Lo que dicen</span>
+      <h2>Historias de nuestros clientes</h2>
+      <p>Más de 2,500 personas han vivido la experiencia La Nube Roja. Estas son algunas de sus palabras.</p>
+    </div>
+
+    <div class="testimonial-grid">
+      {testimonials.map((t) => (
+        <article class="testimonial">
+          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <p class="quote">“{t.quote}”</p>
+          <div class="author">
+            <div class="avatar">{t.initials}</div>
+            <div>
+              <strong>{t.name}</strong>
+              <span>{t.role}</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--bg-dark);
+    padding: 112px 0;
+  }
+
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .testimonial {
+    background: var(--bg-dark-3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stars {
+    color: var(--accent-2);
+    letter-spacing: 3px;
+    font-size: 1.1rem;
+  }
+
+  .quote {
+    margin: 0;
+    color: #d8d8d8;
+    font-size: 1rem;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .author strong {
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  .author span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+</style>

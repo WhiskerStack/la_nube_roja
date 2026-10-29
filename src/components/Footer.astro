@@ -1,0 +1,224 @@
+---
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#menu', label: 'Menú' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#opiniones', label: 'Opiniones' },
+];
+
+const contact = [
+  { label: 'Calle 23 #456, La Habana', href: '#' },
+  { label: '+1 (555) 123-4567', href: 'tel:+15551234567' },
+  { label: 'hola@lanuberoja.com', href: 'mailto:hola@lanuberoja.com' },
+];
+---
+
+<footer id="contacto" class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#inicio" class="brand">
+        <span class="brand-mark">🍽</span>
+        <span>La Nube <em>Roja</em></span>
+      </a>
+      <p>Cocina cubana auténtica con un toque moderno. Sabor, tradición y sazón en cada plato.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Enlaces</h4>
+      <ul>
+        {quickLinks.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        {contact.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Newsletter</h4>
+      <p class="newsletter-text">Recibe nuestras ofertas y novedades del menú.</p>
+      <form class="newsletter">
+        <input type="email" placeholder="Tu correo" aria-label="Correo electrónico" required />
+        <button type="submit" class="btn btn-primary">Suscribirme</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© {year} La Nube Roja. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ y sazón cubana.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #0b0b0b;
+    padding: 80px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
+    gap: 40px;
+    padding-bottom: 56px;
+  }
+
+  .footer-brand .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand .brand em {
+    color: var(--accent-2);
+    font-style: normal;
+  }
+
+  .footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 20px;
+    max-width: 280px;
+  }
+
+  .socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .socials a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .socials a:hover {
+    background: var(--accent);
+  }
+
+  .footer-col h4 {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-col a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent-2);
+  }
+
+  .newsletter-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 16px;
+  }
+
+  .newsletter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .newsletter input {
+    flex: 1;
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .newsletter input:focus {
+    border-color: var(--accent);
+  }
+
+  .newsletter .btn {
+    padding: 12px 20px;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px 0;
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .footer-bottom-inner p {
+    margin: 0;
+  }
+
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .footer-bottom-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

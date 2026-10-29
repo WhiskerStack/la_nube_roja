@@ -1,0 +1,153 @@
+---
+const links = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#menu', label: 'Menú' },
+  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#opiniones', label: 'Opiniones' },
+  { href: '#contacto', label: 'Contacto' },
+];
+---
+
+<header class="navbar" id="site-navbar">
+  <div class="container nav-inner">
+    <a href="#inicio" class="brand">
+      <span class="brand-mark">🍽</span>
+      <span class="brand-name">La Nube <em>Roja</em></span>
+    </a>
+
+    <nav class="nav-links" id="nav-links">
+      {links.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#menu" class="btn btn-outline">Ver Menú</a>
+      <a href="#reservar" class="btn btn-primary">Reservar Mesa</a>
+    </div>
+
+    <button class="nav-toggle" aria-label="Abrir menú" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const navbar = document.getElementById('site-navbar');
+  const navLinks = document.getElementById('nav-links');
+
+  toggle?.addEventListener('click', () => {
+    navbar?.classList.toggle('open');
+  });
+
+  navLinks?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => navbar?.classList.remove('open'));
+  });
+</script>
+
+<style>
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 20px 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .brand em {
+    color: var(--accent-2);
+    font-style: normal;
+  }
+
+  .brand-mark {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .nav-links a {
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--accent-2);
+  }
+
+  .nav-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .nav-cta .btn {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 960px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+    }
+    .navbar.open .nav-links {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: var(--bg-dark-2);
+      padding: 24px;
+      gap: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+  }
+</style>

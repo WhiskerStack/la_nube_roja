@@ -1,0 +1,207 @@
+---
+import { getImageUrl } from '../lib/menu';
+---
+
+<section id="inicio" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Cocina Cubana Auténtica</span>
+      <h1>Sabor que <em>enciende</em> el alma</h1>
+      <p>
+        En La Nube Roja celebramos la tradición cubana con recetas de familia,
+        ingredientes frescos y ese toque ahumado que nos hace inolvidables.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">Ordenar Ahora</a>
+        <a href="#reservar" class="btn btn-outline">Reservar Mesa</a>
+      </div>
+      <ul class="hero-badges">
+        <li><strong>100%</strong><span>Fresco</span></li>
+        <li><strong>12+</strong><span>Años</span></li>
+        <li><strong>2.5k</strong><span>Clientes felices</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <img
+        src={getImageUrl('picadera_mixta.jpg')}
+        alt="Picadera mixta de La Nube Roja"
+        class="hero-image"
+        loading="eager"
+      />
+      <div class="hero-badge">
+        <span class="badge-star">★</span>
+        <div>
+          <strong>4.9 / 5</strong>
+          <small>2,500+ opiniones</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 160px 0 96px;
+    overflow: hidden;
+    background: var(--bg-dark);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(230, 126, 34, 0.18), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(243, 156, 18, 0.12), transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-copy h1 em {
+    font-style: italic;
+    color: var(--accent-2);
+    font-family: var(--font-serif);
+  }
+
+  .hero-copy p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 520px;
+    margin: 0 0 32px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hero-badges li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero-badges strong {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--accent-2);
+  }
+
+  .hero-badges span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230, 126, 34, 0.55), transparent 65%);
+    filter: blur(40px);
+    z-index: 0;
+  }
+
+  .hero-image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(17, 17, 17, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 14px 20px;
+    border-radius: 14px;
+  }
+
+  .badge-star {
+    color: var(--accent-2);
+    font-size: 1.4rem;
+  }
+
+  .hero-badge strong {
+    display: block;
+    font-size: 0.95rem;
+  }
+
+  .hero-badge small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      padding: 140px 0 80px;
+    }
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      text-align: center;
+    }
+    .hero-copy p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-actions,
+    .hero-badges {
+      justify-content: center;
+    }
+    .hero-image {
+      max-width: 340px;
+    }
+    .hero-badge {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+</style>

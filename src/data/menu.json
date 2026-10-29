@@ -1,0 +1,99 @@
+{
+  "categories": [
+    {
+      "id": "entrantes",
+      "name": "Entrantes",
+      "items": [
+        {
+          "id": "bolitas-de-queso",
+          "name": "Bolitas de Queso",
+          "description": "Crujientes bocaditos de queso fundido, empanizados y fritos al momento.",
+          "price": 6.5,
+          "image": "bolitas_de_queso.jpg",
+          "featured": true,
+          "tag": "Favorito"
+        },
+        {
+          "id": "croquetas-de-jamon",
+          "name": "Croquetas de Jamón",
+          "description": "Cremosas croquetas de jamón con un toque de nuez moscada.",
+          "price": 7.0,
+          "image": "croquetas.jpg"
+        },
+        {
+          "id": "picadera-mixta",
+          "name": "Picadera Mixta",
+          "description": "Surtido de la casa: croquetas, bolitas, alitas y papas. Ideal para compartir.",
+          "price": 14.5,
+          "image": "picadera_mixta.jpg",
+          "featured": true,
+          "tag": "Para Compartir"
+        }
+      ]
+    },
+    {
+      "id": "platos-principales",
+      "name": "Platos Principales",
+      "items": [
+        {
+          "id": "arroz-frito",
+          "name": "Arroz Frito",
+          "description": "Arroz salteado con vegetales, huevo y trozos de cerdo al estilo de la casa.",
+          "price": 11.0,
+          "image": "arroz_frito.jpg",
+          "featured": true
+        },
+        {
+          "id": "hamburguesa",
+          "name": "Hamburguesa",
+          "description": "Carne de res a la parrilla, queso, lechuga y tomate en pan artesanal.",
+          "price": 10.5,
+          "image": "hamburgesa.jpg"
+        },
+        {
+          "id": "pizza",
+          "name": "Pizza",
+          "description": "Base crujiente con salsa de tomate, queso y el toque ahumado de la casa.",
+          "price": 12.0,
+          "image": "pizza.jpg"
+        },
+        {
+          "id": "tacos",
+          "name": "Tacos al Estilo",
+          "description": "Tortillas suaves con carne desmenuzada y vegetales frescos.",
+          "price": 9.0,
+          "image": "tacos.jpg"
+        },
+        {
+          "id": "espaguetis",
+          "name": "Espaguetis",
+          "description": "Pasta con salsa de tomate criolla y queso gratinado.",
+          "price": 10.0,
+          "image": "espaguetis.jpg"
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "name": "Bebidas",
+      "items": [
+        {
+          "id": "mojito",
+          "name": "Mojito",
+          "description": "Ron blanco, menta, lima y soda. Refrescante y clásico.",
+          "price": 8.0,
+          "image": "mohito.jpg",
+          "featured": true,
+          "tag": "Cóctel de la Casa"
+        },
+        {
+          "id": "cervezas",
+          "name": "Cervezas",
+          "description": "Selección de cervezas frías nacionales e importadas.",
+          "price": 4.5,
+          "image": "cervezas.jpg"
+        }
+      ]
+    }
+  ]
+}
