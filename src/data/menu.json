@@ -9,7 +9,7 @@
           "name": "Bolitas de Queso",
           "description": "Crujientes bocaditos de queso fundido, empanizados y fritos al momento.",
           "price": 6.5,
-          "image": "bolitas_de_queso.jpg",
+          "image": "bolitas_de_queso.webp",
           "featured": true,
           "tag": "Favorito"
         },
@@ -18,14 +18,14 @@
           "name": "Croquetas de Jamón",
           "description": "Cremosas croquetas de jamón con un toque de nuez moscada.",
           "price": 7.0,
-          "image": "croquetas.jpg"
+          "image": "croquetas.webp"
         },
         {
           "id": "picadera-mixta",
           "name": "Picadera Mixta",
           "description": "Surtido de la casa: croquetas, bolitas, alitas y papas. Ideal para compartir.",
           "price": 14.5,
-          "image": "picadera_mixta.jpg",
+          "image": "picadera_mixta.webp",
           "featured": true,
           "tag": "Para Compartir"
         }
@@ -40,7 +40,7 @@
           "name": "Arroz Frito",
           "description": "Arroz salteado con vegetales, huevo y trozos de cerdo al estilo de la casa.",
           "price": 11.0,
-          "image": "arroz_frito.jpg",
+          "image": "arroz_frito.webp",
           "featured": true
         },
         {
@@ -48,28 +48,28 @@
           "name": "Hamburguesa",
           "description": "Carne de res a la parrilla, queso, lechuga y tomate en pan artesanal.",
           "price": 10.5,
-          "image": "hamburgesa.jpg"
+          "image": "hamburgesa.webp"
         },
         {
           "id": "pizza",
           "name": "Pizza",
           "description": "Base crujiente con salsa de tomate, queso y el toque ahumado de la casa.",
           "price": 12.0,
-          "image": "pizza.jpg"
+          "image": "pizza.webp"
         },
         {
           "id": "tacos",
           "name": "Tacos al Estilo",
           "description": "Tortillas suaves con carne desmenuzada y vegetales frescos.",
           "price": 9.0,
-          "image": "tacos.jpg"
+          "image": "tacos.webp"
         },
         {
           "id": "espaguetis",
           "name": "Espaguetis",
           "description": "Pasta con salsa de tomate criolla y queso gratinado.",
           "price": 10.0,
-          "image": "espaguetis.jpg"
+          "image": "espaguetis.webp"
         }
       ]
     },
@@ -82,7 +82,7 @@
           "name": "Mojito",
           "description": "Ron blanco, menta, lima y soda. Refrescante y clásico.",
           "price": 8.0,
-          "image": "mohito.jpg",
+          "image": "mohito.webp",
           "featured": true,
           "tag": "Cóctel de la Casa"
         },
@@ -91,7 +91,7 @@
           "name": "Cervezas",
           "description": "Selección de cervezas frías nacionales e importadas.",
           "price": 4.5,
-          "image": "cervezas.jpg"
+          "image": "cervezas.webp"
         }
       ]
     }
