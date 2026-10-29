@@ -1,4 +1,6 @@
+// src/lib/menu.ts
 import menuData from '../data/menu.json';
+import { assetPath } from './assets';
 
 export interface MenuItem {
   id: string;
@@ -37,7 +39,7 @@ export function getFeaturedItems(limit = 4): MenuItem[] {
 }
 
 export function getImageUrl(fileName: string): string {
-  return `/catalog/${fileName}`;
+  return assetPath(`/catalog/${fileName}`);
 }
 
 export function formatPrice(price: number): string {
