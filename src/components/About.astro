@@ -1,12 +1,5 @@
 ---
 import { getImageUrl } from '../lib/menu';
-
-const stats = [
-  { value: '12+', label: 'Años de tradición' },
-  { value: '50+', label: 'Recetas de familia' },
-  { value: '2.5k', label: 'Clientes felices' },
-  { value: '4.9', label: 'Calificación promedio' },
-];
 ---
 
 <section id="nosotros" class="about">
@@ -14,13 +7,6 @@ const stats = [
     <div class="about-visual">
       <img class="img-main" src={getImageUrl('arroz_frito.jpg')} alt="Arroz frito cubano" loading="lazy" />
       <img class="img-secondary" src={getImageUrl('croquetas.jpg')} alt="Croquetas de jamón" loading="lazy" />
-      <div class="about-chip">
-        <span>★</span>
-        <div>
-          <strong>Cocina premiada</strong>
-          <small>Sabor auténtico cubano</small>
-        </div>
-      </div>
     </div>
 
     <div class="about-copy">
@@ -34,15 +20,6 @@ const stats = [
         Cada plato es una mezcla de recetas heredadas y un toque moderno que nos hace únicos.
         Nuestros ingredientes se seleccionan a diario para garantizar frescura en cada bocado.
       </p>
-      <div class="stats">
-        {stats.map((stat) => (
-          <div class="stat">
-            <strong>{stat.value}</strong>
-            <span>{stat.label}</span>
-          </div>
-        ))}
-      </div>
-      <a href="#menu" class="btn btn-primary">Descubrir el Menú</a>
     </div>
   </div>
 </section>
@@ -86,34 +63,6 @@ const stats = [
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   }
 
-  .about-chip {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    background: var(--accent);
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 14px;
-    box-shadow: 0 14px 30px rgba(230, 126, 34, 0.4);
-  }
-
-  .about-chip span {
-    font-size: 1.3rem;
-  }
-
-  .about-chip strong {
-    display: block;
-    font-size: 0.85rem;
-  }
-
-  .about-chip small {
-    font-size: 0.7rem;
-    opacity: 0.85;
-  }
-
   .about-copy h2 {
     font-size: clamp(2rem, 4vw, 2.8rem);
     margin-bottom: 24px;
@@ -128,32 +77,6 @@ const stats = [
     color: var(--text-muted);
     margin: 0 0 16px;
     font-size: 1rem;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 32px 0;
-  }
-
-  .stat {
-    border-left: 2px solid var(--accent);
-    padding-left: 16px;
-  }
-
-  .stat strong {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    color: var(--accent-2);
-  }
-
-  .stat span {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
   @media (max-width: 960px) {

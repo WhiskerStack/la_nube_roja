@@ -50,11 +50,7 @@ const contact = [
 
     <div class="footer-col">
       <h4>Newsletter</h4>
-      <p class="newsletter-text">Recibe nuestras ofertas y novedades del menú.</p>
-      <form class="newsletter">
-        <input type="email" placeholder="Tu correo" aria-label="Correo electrónico" required />
-        <button type="submit" class="btn btn-primary">Suscribirme</button>
-      </form>
+      <p class="newsletter-text">Muy pronto podrás suscribirte para recibir nuestras ofertas y novedades del menú.</p>
     </div>
   </div>
 
@@ -156,36 +152,8 @@ const contact = [
   .newsletter-text {
     color: var(--text-muted);
     font-size: 0.9rem;
-    margin: 0 0 16px;
-  }
-
-  .newsletter {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .newsletter input {
-    flex: 1;
-    min-width: 140px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    padding: 12px 14px;
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-
-  .newsletter input:focus {
-    border-color: var(--accent);
-  }
-
-  .newsletter .btn {
-    padding: 12px 20px;
-    font-size: 0.85rem;
+    margin: 0;
+    max-width: 280px;
   }
 
   .footer-bottom {

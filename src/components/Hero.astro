@@ -12,15 +12,6 @@ import { getImageUrl } from '../lib/menu';
         En La Nube Roja celebramos la tradición cubana con recetas de familia,
         ingredientes frescos y ese toque ahumado que nos hace inolvidables.
       </p>
-      <div class="hero-actions">
-        <a href="#menu" class="btn btn-primary">Ordenar Ahora</a>
-        <a href="#reservar" class="btn btn-outline">Reservar Mesa</a>
-      </div>
-      <ul class="hero-badges">
-        <li><strong>100%</strong><span>Fresco</span></li>
-        <li><strong>12+</strong><span>Años</span></li>
-        <li><strong>2.5k</strong><span>Clientes felices</span></li>
-      </ul>
     </div>
 
     <div class="hero-visual">
@@ -31,13 +22,6 @@ import { getImageUrl } from '../lib/menu';
         class="hero-image"
         loading="eager"
       />
-      <div class="hero-badge">
-        <span class="badge-star">★</span>
-        <div>
-          <strong>4.9 / 5</strong>
-          <small>2,500+ opiniones</small>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -83,41 +67,7 @@ import { getImageUrl } from '../lib/menu';
     color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 520px;
-    margin: 0 0 32px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-
-  .hero-badges {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-    padding: 0;
     margin: 0;
-  }
-
-  .hero-badges li {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .hero-badges strong {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    color: var(--accent-2);
-  }
-
-  .hero-badges span {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
   }
 
   .hero-visual {
@@ -149,36 +99,6 @@ import { getImageUrl } from '../lib/menu';
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
   }
 
-  .hero-badge {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(17, 17, 17, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    padding: 14px 20px;
-    border-radius: 14px;
-  }
-
-  .badge-star {
-    color: var(--accent-2);
-    font-size: 1.4rem;
-  }
-
-  .hero-badge strong {
-    display: block;
-    font-size: 0.95rem;
-  }
-
-  .hero-badge small {
-    color: var(--text-muted);
-    font-size: 0.75rem;
-  }
-
   @media (max-width: 960px) {
     .hero {
       padding: 140px 0 80px;
@@ -192,16 +112,8 @@ import { getImageUrl } from '../lib/menu';
       margin-left: auto;
       margin-right: auto;
     }
-    .hero-actions,
-    .hero-badges {
-      justify-content: center;
-    }
     .hero-image {
       max-width: 340px;
-    }
-    .hero-badge {
-      left: 50%;
-      transform: translateX(-50%);
     }
   }
 </style>

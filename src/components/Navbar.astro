@@ -21,11 +21,6 @@ const links = [
       ))}
     </nav>
 
-    <div class="nav-cta">
-      <a href="#menu" class="btn btn-outline">Ver Menú</a>
-      <a href="#reservar" class="btn btn-primary">Reservar Mesa</a>
-    </div>
-
     <button class="nav-toggle" aria-label="Abrir menú" type="button">
       <span></span><span></span><span></span>
     </button>
@@ -99,17 +94,6 @@ const links = [
     color: var(--accent-2);
   }
 
-  .nav-cta {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .nav-cta .btn {
-    padding: 10px 20px;
-    font-size: 0.85rem;
-  }
-
   .nav-toggle {
     display: none;
     flex-direction: column;
@@ -129,8 +113,7 @@ const links = [
   }
 
   @media (max-width: 960px) {
-    .nav-links,
-    .nav-cta {
+    .nav-links {
       display: none;
     }
     .nav-toggle {

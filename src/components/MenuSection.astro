@@ -1,5 +1,5 @@
 ---
-import { getMenu, getImageUrl, formatPrice } from '../lib/menu';
+import { getMenu, getImageUrl } from '../lib/menu';
 
 const categories = getMenu();
 ---
@@ -28,13 +28,8 @@ const categories = getMenu();
               <div class="card-body">
                 <div class="card-title">
                   <h4>{item.name}</h4>
-                  <span class="price">{formatPrice(item.price)}</span>
                 </div>
                 <p>{item.description}</p>
-                <button class="add-btn" type="button" aria-label={`Añadir ${item.name} al pedido`}>
-                  <span>Añadir</span>
-                  <span class="plus">+</span>
-                </button>
               </div>
             </article>
           ))}
@@ -159,45 +154,10 @@ const categories = getMenu();
     color: var(--brown);
   }
 
-  .price {
-    font-family: var(--font-serif);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--accent);
-    white-space: nowrap;
-  }
-
   .card-body p {
     color: #6b4f43;
     font-size: 0.92rem;
     margin: 0;
     flex: 1;
-  }
-
-  .add-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 8px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    border: 1px solid rgba(230, 126, 34, 0.4);
-    background: transparent;
-    color: var(--accent);
-    font-weight: 600;
-    font-family: var(--font-sans);
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-  }
-
-  .add-btn:hover {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  .add-btn .plus {
-    font-size: 1.1rem;
-    line-height: 1;
   }
 </style>

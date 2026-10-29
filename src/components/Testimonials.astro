@@ -26,13 +26,12 @@ const testimonials = [
     <div class="section-head">
       <span class="eyebrow">Lo que dicen</span>
       <h2>Historias de nuestros clientes</h2>
-      <p>Más de 2,500 personas han vivido la experiencia La Nube Roja. Estas son algunas de sus palabras.</p>
+      <p>Estas son algunas de las palabras de quienes han vivido la experiencia La Nube Roja.</p>
     </div>
 
     <div class="testimonial-grid">
       {testimonials.map((t) => (
         <article class="testimonial">
-          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
           <p class="quote">“{t.quote}”</p>
           <div class="author">
             <div class="avatar">{t.initials}</div>
@@ -67,12 +66,6 @@ const testimonials = [
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  .stars {
-    color: var(--accent-2);
-    letter-spacing: 3px;
-    font-size: 1.1rem;
   }
 
   .quote {
