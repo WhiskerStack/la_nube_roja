@@ -28,6 +28,9 @@ const PAGES_DIR = path.join(ROOT, 'src', 'pages');
 const OUTPUT_DIR = path.join(ROOT, 'local', 'screenshot');
 const BASE_URL = (process.env.BASE_URL ?? 'http://localhost:4321').replace(/\/+$/, '');
 
+const MAX_PAGE_HEIGHT = 20_000;
+const PAGE_HARD_TIMEOUT = 90_000;
+
 const DEVICES = [
   {
     name: 'desktop',
@@ -43,15 +46,18 @@ const DEVICES = [
     name: 'mobile',
     context: {
       viewport: { width: 390, height: 844 },
-      deviceScaleFactor: 2,
-      isMobile: true,
-      hasTouch: true,
+      deviceScaleFactor: 1,
+      isMobile: false,
+      hasTouch: false,
       reducedMotion: 'reduce',
-      userAgent:
-        'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
     },
   },
 ];
+
+function log(message) {
+  const stamp = new Date().toISOString().slice(11, 19);
+  console.log(`[${stamp}] ${message}`);
+}
 
 async function walk(dir) {
   const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -76,7 +82,6 @@ function toRoute(file) {
   if (!relative.endsWith('.astro')) return null;
   relative = relative.slice(0, -'.astro'.length);
 
-  // Skip private files, dynamic routes and 404
   if (relative.split('/').some((segment) => segment.startsWith('_'))) return null;
   if (relative.includes('[')) return null;
   if (relative === '404') return null;
@@ -107,61 +112,134 @@ async function assertServerIsUp() {
   }
 }
 
-async function triggerLazyContent(page) {
+async function preparePage(page, label) {
+  log(`${label} - desactivando animaciones y smooth scroll`);
+  await page.addStyleTag({
+    content: `
+      html, body { scroll-behavior: auto !important; }
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+      }
+    `,
+  });
+
+  log(`${label} - esperando red`);
+  await page.waitForLoadState('networkidle', { timeout: 10_000 }).catch(() => {});
+
+  log(`${label} - esperando fuentes`);
+  await page.evaluate(() =>
+    Promise.race([
+      document.fonts.ready,
+      new Promise((resolve) => setTimeout(resolve, 5000)),
+    ])
+  );
+
+  log(`${label} - scroll para lazy load`);
   await page.evaluate(async () => {
     const step = Math.max(window.innerHeight * 0.75, 300);
     let y = 0;
     let guard = 0;
 
-    while (y < document.body.scrollHeight && guard < 200) {
+    while (y < document.documentElement.scrollHeight && guard < 200) {
       window.scrollTo(0, y);
-      await new Promise((resolve) => setTimeout(resolve, 120));
+      await new Promise((resolve) => setTimeout(resolve, 80));
       y += step;
       guard += 1;
     }
 
     window.scrollTo(0, 0);
-    await new Promise((resolve) => setTimeout(resolve, 120));
+    await new Promise((resolve) => setTimeout(resolve, 100));
   });
-}
 
-async function waitForImages(page) {
+  log(`${label} - esperando imágenes`);
   await page.evaluate(async () => {
-    const images = Array.from(document.images);
-
     await Promise.all(
-      images.map(
-        (img) =>
-          new Promise((resolve) => {
-            if (img.complete && img.naturalWidth > 0) {
-              resolve();
-              return;
-            }
-
-            img.addEventListener('load', resolve, { once: true });
-            img.addEventListener('error', resolve, { once: true });
-            setTimeout(resolve, 5000);
-          })
-      )
-    );
-
-    await Promise.all(
-      images.map((img) =>
-        typeof img.decode === 'function' ? img.decode().catch(() => {}) : Promise.resolve()
-      )
+      Array.from(document.images).map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.addEventListener('load', resolve, { once: true });
+          img.addEventListener('error', resolve, { once: true });
+          setTimeout(resolve, 5000);
+        });
+      })
     );
   });
 }
 
-async function preparePage(page) {
-  await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
-  await page.evaluate(async () => {
-    await document.fonts.ready;
+async function captureRoute(browser, device, route) {
+  const url = `${BASE_URL}${route}`;
+  const name = `${routeToName(route)}-${device.name}.png`;
+  const output = path.join(OUTPUT_DIR, name);
+  const label = `[${device.name}] ${route}`;
+
+  log(`${label} - creando contexto`);
+  const context = await browser.newContext(device.context);
+
+  const run = async () => {
+    const page = await context.newPage();
+
+    try {
+      log(`${label} - goto`);
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30_000 });
+
+      await preparePage(page, label);
+
+      const dims = await page.evaluate(() => ({
+        width: Math.ceil(document.documentElement.scrollWidth),
+        height: Math.ceil(document.documentElement.scrollHeight),
+      }));
+      log(`${label} - dimensiones: ${dims.width}x${dims.height}`);
+
+      const targetHeight = Math.min(dims.height, MAX_PAGE_HEIGHT);
+      if (targetHeight < dims.height) {
+        log(`${label} - recortando altura a ${targetHeight}px (era ${dims.height}px)`);
+      }
+
+      log(`${label} - redimensionando viewport a ${device.context.viewport.width}x${targetHeight}`);
+      await page.setViewportSize({
+        width: device.context.viewport.width,
+        height: targetHeight,
+      });
+
+      await page.waitForTimeout(600);
+
+      log(`${label} - capturando screenshot`);
+      await page.screenshot({
+        path: output,
+        timeout: 30_000,
+        animations: 'disabled',
+        caret: 'hide',
+        fullPage: false,
+      });
+
+      log(`${label} - OK -> local/screenshot/${name}`);
+    } finally {
+      await page.close().catch(() => {});
+    }
+  };
+
+  // Timer de hard timeout, cancelable.
+  let timerHandle;
+  const hardTimeout = new Promise((_, reject) => {
+    timerHandle = setTimeout(
+      () => reject(new Error(`HARD TIMEOUT tras ${PAGE_HARD_TIMEOUT}ms`)),
+      PAGE_HARD_TIMEOUT
+    );
+    // Respaldo: no mantiene vivo el event loop si se nos olvida clearTimeout.
+    timerHandle.unref?.();
   });
 
-  await triggerLazyContent(page);
-  await waitForImages(page);
-  await page.waitForTimeout(250);
+  try {
+    await Promise.race([run(), hardTimeout]);
+  } catch (error) {
+    console.error(`  ✗ ${label}: ${error.message}`);
+  } finally {
+    clearTimeout(timerHandle);
+    await context.close().catch(() => {});
+  }
 }
 
 async function main() {
@@ -176,44 +254,38 @@ async function main() {
 
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
 
-  console.log(`Páginas detectadas: ${routes.join(', ')}`);
+  log(`Páginas detectadas: ${routes.join(', ')}`);
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({
+    args: [
+      '--disable-dev-shm-usage',
+      '--no-sandbox',
+      '--disable-gpu',
+      '--disable-software-rasterizer',
+    ],
+  });
 
   try {
     for (const device of DEVICES) {
-      const context = await browser.newContext(device.context);
-
+      log(`=== Dispositivo: ${device.name} ===`);
       for (const route of routes) {
-        const url = `${BASE_URL}${route}`;
-        const name = `${routeToName(route)}-${device.name}.png`;
-        const output = path.join(OUTPUT_DIR, name);
-        const page = await context.newPage();
-
-        console.log(`Capturando ${url} (${device.name}) -> local/screenshot/${name}`);
-
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
-        await preparePage(page);
-
-        await page.screenshot({
-          path: output,
-          fullPage: true,
-          animations: 'disabled',
-        });
-
-        await page.close();
+        await captureRoute(browser, device, route);
       }
-
-      await context.close();
     }
   } finally {
-    await browser.close();
+    await browser.close().catch(() => {});
   }
 
-  console.log(`\nListo. Capturas guardadas en ${OUTPUT_DIR}`);
+  log(`Listo. Capturas guardadas en ${OUTPUT_DIR}`);
 }
 
-main().catch((error) => {
-  console.error(`\nError: ${error.message}`);
-  process.exitCode = 1;
-});
+main()
+  .then(() => {
+    // Fuerza la salida: si alguna lib de Playwright deja un handle colgado,
+    // no queremos que el proceso quede zombie.
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error(`\nError: ${error.message}`);
+    process.exit(1);
+  });
